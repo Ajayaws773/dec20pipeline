@@ -14,7 +14,7 @@ pipeline {
    sh 'mvn package'
       }
     }
-stage(SonarQube analysis') {
+stage('SonarQube analysis') {
             steps {
                 withSonarQubeEnv('sonar') {
                           sh 'mvn sonar:sonar'
