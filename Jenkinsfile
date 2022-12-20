@@ -14,12 +14,13 @@ pipeline {
    sh 'mvn package'
       }
     }
-    stage('SonarQube analysis') {
+stage('SonarQube analysis') {
+    steps{
     withSonarQubeEnv('sonarid') { 
       sh "mvn sonar:sonar"
     }
+    }
   }
-
 
 }
 
