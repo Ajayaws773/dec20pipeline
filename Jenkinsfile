@@ -14,15 +14,13 @@ pipeline {
    sh 'mvn package'
       }
     }
-stage(SonarQube analysis') {
-            steps {
-                withSonarQubeEnv('sonarid') {
-                        withMaven(maven:'Maven 3.5') {
-                        sh 'mvn sonar:sonar'
-                    }
-                }
-            }
-        }
-}
 
+stage('artifact') {
+  
+      steps {
+   nexusArtifactUploader artifacts: [[artifactId: 'studentapp', classifier: '', file: 'target/studentapp-2.6-SNAPSHOT.war', type: 'war']], credentialsId: 'nexus', groupId: 'com.jdevs', nexusUrl: '3.7.254.3:8081', nexusVersion: 'nexus3', protocol: 'http', repository: 'maven-snapshots/', version: '2.6-SNAPSHOT'
+      }
+    }
+
+}
 }
