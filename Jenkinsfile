@@ -14,14 +14,13 @@ pipeline {
    sh 'mvn package'
       }
     }
-stage('scan') {
-  
-      steps {
-    withSonarQubeEnv(credentialsId: 'sonarid') {
-    sh 'mvn sonar:sonar'
-}
-      }
+    stage('SonarQube analysis') {
+    withSonarQubeEnv('sonarid') { 
+      sh "mvn sonar:sonar"
     }
+  }
+
+
 }
 
 }
