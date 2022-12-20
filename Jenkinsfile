@@ -14,7 +14,14 @@ pipeline {
    sh 'mvn package'
       }
     }
-
+stage('scan') {
+  
+      steps {
+    withSonarQubeEnv(credentialsId: 'sonarid') {
+    sh 'mvn sonar:sonar'
+}
+      }
+    }
 }
 
 }
