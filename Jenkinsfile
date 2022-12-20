@@ -14,14 +14,15 @@ pipeline {
    sh 'mvn package'
       }
     }
-stage('SonarQube analysis') {
-    steps{
-    withSonarQubeEnv('sonarid') { 
-      sh "mvn sonar:sonar"
-    }
-    }
-  }
-
+stage(SonarQube analysis') {
+            steps {
+                withSonarQubeEnv('sonarid') {
+                        withMaven(maven:'Maven 3.5') {
+                        sh 'mvn sonar:sonar'
+                    }
+                }
+            }
+        }
 }
 
 }
